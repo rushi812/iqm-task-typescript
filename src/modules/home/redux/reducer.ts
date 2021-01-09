@@ -1,16 +1,27 @@
 import { ReducerAction } from './../../../types/action'
-import { AppState, StateResult } from './../../../types/state'
+import { AppState, StateResult, Questions } from './../../../types/state'
 import * as actionTypes from './actionTypes'
 
-interface INITIAL_STATE {
-  questions: object
-  selectedQuestion: object
-  getQuestionsLoading: boolean
+// interface INITIAL_STATE {
+//   questions: object
+//   selectedQuestion: object
+//   getQuestionsLoading: boolean
+// }
+
+const INITIAL_STATE:AppState = {
+  questions: {
+    items: [],
+    has_more: false,
+    quota_max: 0,
+    quota_remaining: 0
+  },
+  selectedQuestion: null,
+  getQuestionsLoading: null
 }
 
 // type State = INITIAL_STATE[]
 
-const appReducer = (state: AppState, action: ReducerAction) => {
+const appReducer = (state: AppState = INITIAL_STATE, action: ReducerAction) => {
   const { type, payload } = action
 
   switch (type) {

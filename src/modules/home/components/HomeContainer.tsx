@@ -1,18 +1,18 @@
 import React, { useEffect, useState, Dispatch } from 'react'
 import { connect } from 'react-redux'
 import { ReducerAction } from '../../../types/action'
-import { Question, StateResult } from '../../../types/state'
+import { Question, Questions, StateResult } from '../../../types/state'
 
 import * as action from '../redux/action'
 import Home from './Home'
 import QuestionDetailsModal from './QuestionDetailsModal/QuestionDetailsModal'
 
-interface Props {
-  questions: object;
+type Props = {
+  questions: Questions;
   getQuestions: (pageNumber: number) =>  void;
-  setSelectedQuestion: (question: object) => void;
-  selectedQuestion: object;
-  getQuestionsLoading: boolean;
+  setSelectedQuestion: (question: Question) => void;
+  selectedQuestion: any;
+  getQuestionsLoading: any;
 }
 
 const HomeContainer: React.FC<Props> = ({
@@ -32,7 +32,7 @@ const HomeContainer: React.FC<Props> = ({
     setIsOpen(!isOpen)
   }
 
-  const viewDetailsBtnHandler = async (e: React.MouseEvent<HTMLButtonElement>, question: object) => {
+  const viewDetailsBtnHandler = async (e: React.MouseEvent<HTMLButtonElement>, question: Question) => {
     await setSelectedQuestion(question)
     handleModal()
   }
