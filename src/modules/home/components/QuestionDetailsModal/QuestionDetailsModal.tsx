@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -8,10 +7,16 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
-import { noop } from '../../../../utils'
+import { Question } from '../../../../types/state'
 
-const QuestionDetailsModal = ({ open, handleModal, selectedQuestion }) => {
-  const learnMoreBtnHandler = (e, link) => {
+type Props = {
+  open: boolean;
+  selectedQuestion: Question;
+  handleModal: () => void;
+}
+
+const QuestionDetailsModal:React.FC<Props> = ({ open, handleModal, selectedQuestion }) => {
+  const learnMoreBtnHandler = (e: React.MouseEvent<HTMLButtonElement>, link: string) => {
     window.open(link, '_blank')
   }
 
@@ -56,18 +61,6 @@ const QuestionDetailsModal = ({ open, handleModal, selectedQuestion }) => {
       )}
     </Dialog>
   )
-}
-
-QuestionDetailsModal.propTypes = {
-  open: PropTypes.bool,
-  handleModal: PropTypes.func,
-  selectedQuestion: PropTypes.instanceOf(Object)
-}
-
-QuestionDetailsModal.defaultProps = {
-  open: false,
-  handleModal: noop,
-  selectedQuestion: {}
 }
 
 export default QuestionDetailsModal

@@ -1,5 +1,4 @@
 import React, { useRef, useCallback } from 'react'
-import PropTypes from 'prop-types'
 
 import { withStyles, makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -13,7 +12,17 @@ import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-import { formatedDate, noop } from '../../../utils'
+import { formatedDate } from '../../../utils'
+import { Questions, Question } from '../../../types/state'
+
+type Props = {
+  questions: Questions;
+  viewDetailsBtnHandler: (e: React.MouseEvent<HTMLButtonElement>, question: Question) => void;
+  getQuestions: (pageNumber: number) =>  void;
+  getQuestionsLoading: any;
+  currentPage: number;
+  setCurrentPage: (pageNumber: number) => void;
+}
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -51,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Home = ({
+const Home: React.FC<Props> = ({
   questions,
   viewDetailsBtnHandler,
   getQuestionsLoading,
@@ -59,8 +68,8 @@ const Home = ({
   currentPage,
   setCurrentPage
 }) => {
-  const observer = useRef()
-  const pageNumber = useRef(0)
+  const observer = useRef<IntersectionObserver | null>()
+  const pageNumber = useRef<number>(0)
   const lastQuestionElementref = useCallback(
     (node) => {
       if (getQuestionsLoading) return
@@ -97,7 +106,7 @@ const Home = ({
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {questions.items.map((question, index) => {
+                {questions.items.map((question: Question, index: number) => {
                   return (
                     <StyledTableRow
                       key={question.question_id}
@@ -141,24 +150,6 @@ const Home = ({
       )}
     </>
   )
-}
-
-Home.propTypes = {
-  questions: PropTypes.instanceOf(Object),
-  viewDetailsBtnHandler: PropTypes.func,
-  getQuestionsLoading: PropTypes.bool,
-  getQuestions: PropTypes.func,
-  currentPage: PropTypes.number,
-  setCurrentPage: PropTypes.func
-}
-
-Home.defaultProps = {
-  questions: {},
-  viewDetailsBtnHandler: noop,
-  getQuestionsLoading: false,
-  getQuestions: noop,
-  currentPage: 0,
-  setCurrentPage: noop
 }
 
 export default Home

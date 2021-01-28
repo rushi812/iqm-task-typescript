@@ -1,8 +1,14 @@
 export type Maybe<T> = T | null
 
 export interface Question {
-  is_answered: boolean
-  view_count: number
+  question_id: string
+  owner: {
+    display_name: string
+  }
+  title: string
+  creation_date: string
+  body: string
+  link: string
 }
 
 export type Items = Maybe<Array<Question>>

@@ -17,6 +17,6 @@ export type ActionType<Name, Payload = {}> = Payload & {
 //   | ActionType<'SET_SELECTED_QUESTION', { payload: Question }>
 
 export type ReducerAction = {
-  type: string,
-  payload: any,
+  type: string
+  payload: any
 }

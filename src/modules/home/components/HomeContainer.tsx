@@ -11,8 +11,8 @@ type Props = {
   questions: Questions;
   getQuestions: (pageNumber: number) =>  void;
   setSelectedQuestion: (question: Question) => void;
-  selectedQuestion: any;
-  getQuestionsLoading: any;
+  selectedQuestion: Question;
+  getQuestionsLoading: boolean;
 }
 
 const HomeContainer: React.FC<Props> = ({
